@@ -3,6 +3,7 @@ import Card from './Components/Card';
 import './App.css';
 import harry from './assets/harry.webp';
 import hermione from './assets/hermione.webp';
+import ron from './assets/ron.webp';
 
 const App = () => {
   const [score, setScore] = useState(0);
@@ -41,7 +42,23 @@ const App = () => {
     visited.clear();
   }
 
-  const characters = ["Harry Potter", "Hermione Granger"];
+  const characters = [
+    {
+      name: "Harry Potter",
+      nickName: "harry",
+      image: harry,
+    },
+    {
+      name: "Hermione Granger",
+      nickName: "hermione",
+      image: hermione,
+    },
+    {
+      name: "Ronald Weasley",
+      nickName: "ron",
+      image: ron,
+    }
+  ]
 
   return (
     <div className="App">
@@ -56,8 +73,13 @@ const App = () => {
           <div>Score:{score}</div>
           <div>Best Score:{bestScore}</div>
         </div>
-        <Card handleClick={valid} name="harry" image={harry} cardText={characters[0]}/>
-        <Card handleClick={valid} name="hermione" image={hermione} cardText={characters[1]}/>
+        <div className="cardWrapper">
+          {
+            characters.map((item,index) => {
+              return <Card handleClick={valid} name={item.nickName} image={item.image} cardText={item.name}/>
+            })
+          }
+        </div>
       </div>
     </div>
   );
