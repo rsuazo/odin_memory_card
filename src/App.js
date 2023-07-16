@@ -4,6 +4,9 @@ import './App.css';
 import harry from './assets/harry.webp';
 import hermione from './assets/hermione.webp';
 import ron from './assets/ron.webp';
+import hagrid from './assets/hagrid.jpeg';
+import snape from './assets/snape.webp';
+import banner from './assets/banner.png';
 
 const App = () => {
   const characters = [
@@ -21,7 +24,17 @@ const App = () => {
       name: "Ronald Weasley",
       nickName: "ron",
       image: ron,
-    }
+    },
+    {
+      name: "Rubeus Hagrid",
+      nickName: "hagrid",
+      image: hagrid,
+    },
+    {
+      name: "Severus Snape",
+      nickName: "snape",
+      image: snape,
+    },
   ]
 
   const [score, setScore] = useState(0);
@@ -31,7 +44,9 @@ const App = () => {
 
   const incrementScore = () => {
     setScore(score + 1);
-    setBestScore(bestScore + 1);
+    if (score == bestScore) {
+      setBestScore(bestScore + 1);
+    }
   }
   
   const valid = (e) => {
@@ -51,7 +66,6 @@ const App = () => {
 
   const resetScore = () => {
     setScore(0);
-    setBestScore(0);
     visited.clear();
   }
 
@@ -99,25 +113,29 @@ const App = () => {
   return (
     <div className="App">
       <header className="App-header">
+      <img src={banner} alt="banner"></img>
         <p>
           Memory Game
         </p>
       </header>
       <div className="gameBody">
-        <div className="scoreboardContainer">
-          <p>Scoreboard</p>
           <div className="scoreContainer">
             <span>Score: {score}</span>
             <span>Best Score: {bestScore}</span>
-          </div>  
-        </div>
-        <div className="cardWrapper">
+          </div>
+          <div className="cardWrapper">
           {
             characterList.map((item,index) => {
-              return <Card handleClick={valid} name={item.nickName} image={item.image} cardText={item.name}/>
+              return (
+                <Card
+                  handleClick={valid} 
+                  name={item.nickName} 
+                  image={item.image} 
+                  cardText={item.name}/>
+              )
             })
           }
-        </div>
+          </div>
       </div>
     </div>
   );
