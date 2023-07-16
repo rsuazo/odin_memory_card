@@ -36,8 +36,6 @@ const App = () => {
   
   const valid = (e) => {
     let current = e.target.parentElement.getAttribute('name');
-    console.log(current);
-    console.log(visited);
     if (!visited.has(current)) {
       setVisited(
         visited.add(current),
@@ -59,7 +57,6 @@ const App = () => {
 
   const generateCharacters = () => {
     let shuffledList = shuffle(characterList);
-    console.log(shuffledList);
     return shuffledList;
   }
 
@@ -96,7 +93,6 @@ const App = () => {
         array[randomIndex], array[currentIndex]];
     }
   
-    console.log(array);
     return array;
   }
 
