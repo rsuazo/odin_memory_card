@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/odin_memory_card/static/css/main.cd13a3a9.css",
+    "main.js": "/odin_memory_card/static/js/main.380d02e6.js",
+    "static/media/banner.png": "/odin_memory_card/static/media/banner.52c4049fdbacde933fb9.png",
+    "static/media/hagrid.jpeg": "/odin_memory_card/static/media/hagrid.ef47e64c6fb659dd4014.jpeg",
+    "static/media/ron.webp": "/odin_memory_card/static/media/ron.da50e976961383ab7291.webp",
+    "static/media/snape.webp": "/odin_memory_card/static/media/snape.65c3983d90a822b63bc7.webp",
+    "static/media/harry.webp": "/odin_memory_card/static/media/harry.7b9fa905196a01c27983.webp",
+    "static/media/hermione.webp": "/odin_memory_card/static/media/hermione.7e7f35e2bfe33b3c016b.webp",
+    "index.html": "/odin_memory_card/index.html",
+    "main.cd13a3a9.css.map": "/odin_memory_card/static/css/main.cd13a3a9.css.map",
+    "main.380d02e6.js.map": "/odin_memory_card/static/js/main.380d02e6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd13a3a9.css",
+    "static/js/main.380d02e6.js"
+  ]
+}
