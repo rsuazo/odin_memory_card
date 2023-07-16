@@ -63,4 +63,14 @@ img {
 
 .cardWrapper {
   display: flex;
+  gap: 1em;
+  padding: 5em;
+}
+
+.scoreContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 1em;
+  font-size:x-large;
+  font-weight:bold;
 }
