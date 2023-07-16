@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Components/Card';
+import GameOver from './Components/overlayGameOver';
 import './App.css';
 import harry from './assets/harry.webp';
 import hermione from './assets/hermione.webp';
 import ron from './assets/ron.webp';
 import hagrid from './assets/hagrid.jpeg';
 import snape from './assets/snape.webp';
+import dumbledore from './assets/dumbledore.webp'
+import hedwig from './assets/hedwig.jpeg'
 import banner from './assets/banner.png';
+
 
 const App = () => {
   const characters = [
@@ -35,16 +39,27 @@ const App = () => {
       nickName: "snape",
       image: snape,
     },
+    {
+      name: "Albus Dumbledore",
+      nickName: "dumbledore",
+      image: dumbledore,
+    },
+    {
+      name: "Hedwig",
+      nickName: "hedwig",
+      image: hedwig,
+    }
   ]
 
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [visited, setVisited] = useState(new Set());
   const [characterList, setCharacterList] = useState(characters);
+  const [gameOver, setGameOver] = useState(false);
 
   const incrementScore = () => {
     setScore(score + 1);
-    if (score == bestScore) {
+    if (score === bestScore) {
       setBestScore(bestScore + 1);
     }
   }
@@ -52,14 +67,12 @@ const App = () => {
   const valid = (e) => {
     let current = e.target.parentElement.getAttribute('name');
     if (!visited.has(current)) {
-      setVisited(
-        visited.add(current),
-      );
+      setVisited(visited.add(current));
       incrementScore();
       return true;
     } else {
+      setGameOver(true);
       resetScore();
-      alert("That Card has already been chosen!");
       return false;
     }
   }
@@ -69,28 +82,16 @@ const App = () => {
     visited.clear();
   }
 
-  const generateCharacters = () => {
-    let shuffledList = shuffle(characterList);
-    return shuffledList;
+  const gameOverCheck = () => {
+    return true;
   }
 
   useEffect(() => {
-    let generatedCharacters = generateCharacters();
-    setCharacterList(generatedCharacters);
+    if (!gameOver) {
+      setCharacterList(shuffle(characterList));
+    }
 
-  },[score]);
-
-  // const checkSelection = () => {
-  //   if (valid) {
-  //     // correct choice, re-render our cards
-  //   } else {
-  //     // game over
-  //   }
-  // }
-
-
-
-
+  },[score,characterList,gameOver]);
 
   const shuffle = (array) => {
     let currentIndex = array.length,  randomIndex;
@@ -110,33 +111,54 @@ const App = () => {
     return array;
   }
 
+  const resetGame = () => {
+    setGameOver(false);
+  }
+
+  const conditionalRender = () => {
+    if (gameOver) {
+      return (
+        <GameOver
+          handleClick={resetGame}
+        />
+      )
+    } else {
+      return (
+      <div>
+        <header className="App-header">
+        <img src={banner} alt="banner"></img>
+          <p>
+            Memory Game
+          </p>
+        </header>
+        <div className="gameBody">
+            <div className="scoreContainer">
+              <span>Score: {score}</span>
+              <span>Best Score: {bestScore}</span>
+            </div>
+            <div className="cardWrapper">
+            {
+              characterList.map((item,index) => {
+                return (
+                  <Card
+                    handleClick={valid} 
+                    name={item.nickName} 
+                    image={item.image} 
+                    cardText={item.name}/>
+                )
+              })
+            }
+            </div>
+        </div>
+      </div>
+      )
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-      <img src={banner} alt="banner"></img>
-        <p>
-          Memory Game
-        </p>
-      </header>
-      <div className="gameBody">
-          <div className="scoreContainer">
-            <span>Score: {score}</span>
-            <span>Best Score: {bestScore}</span>
-          </div>
-          <div className="cardWrapper">
-          {
-            characterList.map((item,index) => {
-              return (
-                <Card
-                  handleClick={valid} 
-                  name={item.nickName} 
-                  image={item.image} 
-                  cardText={item.name}/>
-              )
-            })
-          }
-          </div>
-      </div>
+      {conditionalRender()}
+
     </div>
   );
 }

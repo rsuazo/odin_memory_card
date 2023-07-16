@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const Card = (props) => {
-    const [cardName, setCardName] = useState('');
-
   return (
         <div className="card" onClick={props.handleClick} name={props.name}>
             <img src={props.image} alt="Avatar"></img>
